@@ -1,0 +1,31 @@
+﻿using OdeToFood.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace OdeToFood.Services
+{
+    public class InMemoryRestaurantData: IRestaurantData
+    {
+        List<Restaurant> _restaurants;
+        public InMemoryRestaurantData()
+        {
+            _restaurants = new List<Restaurant> {
+                new Restaurant {  Id = 1, Name = "Scott's Pizza place"},
+                new Restaurant { Id = 2, Name = "Tersiguels"},
+                new Restaurant { Id = 3, Name = "Kings's Contrivance"}
+            };
+        }
+
+        public Restaurant Get(int id)
+        {
+            return _restaurants.FirstOrDefault(o => o.Id == id);
+        }
+
+        public IEnumerable<Restaurant> GetAll()
+        {
+            return _restaurants.OrderBy(o => o.Name);
+        }
+    }
+}
